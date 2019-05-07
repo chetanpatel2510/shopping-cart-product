@@ -3,8 +3,11 @@ package com.shoppingcart.product.controller;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.shoppingcart.product.util.ProductLogger;
 
 /**
  * This class will hold all rest end points for product service.
@@ -14,6 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class ProductController {
+	
+	@Autowired
+	private ProductLogger productLogger;
 
 	/**
 	 * This rest end point will return the host information where the service is
@@ -32,6 +38,8 @@ public class ProductController {
 		builder.append("HostName: ").append(localhost.getHostName());
 		builder.append("Canonical host name: ").append(localhost.getCanonicalHostName());
 		
+		productLogger.info(this, "Host Information is: {}", builder.toString());
+		
 		return builder.toString();
 	}
 	
@@ -43,6 +51,7 @@ public class ProductController {
 	 */
 	@GetMapping("/healthCheck")
 	public String healthCheck() {
+		productLogger.info(this, "Health of the application is good...");
 		return "Success";
 	}
 	
