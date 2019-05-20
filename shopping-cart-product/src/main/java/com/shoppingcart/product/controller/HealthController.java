@@ -36,7 +36,7 @@ public class HealthController {
 	@Value("${properties.filename}")
 	private String propertiesFile;
 	
-	@Value("${build.number}")
+	@Value("${build.number:localBuild}")
 	private String buildNumber;
 	
 	/**
