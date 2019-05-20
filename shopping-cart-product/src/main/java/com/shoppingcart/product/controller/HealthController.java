@@ -36,6 +36,9 @@ public class HealthController {
 	@Value("${properties.filename}")
 	private String propertiesFile;
 	
+	@Value("${build.number}")
+	private String buildNumber;
+	
 	/**
 	 * This rest end point will return the host information where the service is
 	 * deployed.
@@ -50,10 +53,12 @@ public class HealthController {
 		String ipAddress = localhost.getHostAddress();
 		StringBuilder builder = new StringBuilder();
 		builder.append(" IP Address: ").append(ipAddress);
-		builder.append(" HostName: ").append(localhost.getHostName());
-		builder.append(" Canonical host name: ").append(localhost.getCanonicalHostName());
-		builder.append(" Properties File Loaded: ").append(propertiesFile);
-		builder.append(" User Name: ").append(username);
+		builder.append("<br/> HostName: ").append(localhost.getHostName());
+		builder.append("<br/> Canonical host name: ").append(localhost.getCanonicalHostName());
+		builder.append("<br/> Properties File Loaded: ").append(propertiesFile);
+		builder.append("<br/> User Name: ").append(username);
+		builder.append("<br/> Build Number: ").append(buildNumber);
+		
 		
 		logger.info(this, " Host Information is: {}", builder.toString());
 		
