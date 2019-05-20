@@ -9,6 +9,7 @@ import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.datastax.driver.core.LocalDate;
 import com.shoppingcart.product.util.ProductConstants.DateFormat;
 
 /**
@@ -40,13 +41,35 @@ public class DateUtils {
 	 * 
 	 * @return date without time.
 	 */
-	public static Date getDateWithoutTimestamp() {
+	public static Date getDateWithoutTimestamp(final Date date) {
 		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(new Date());
+		calendar.setTime(date);
 		calendar.set(Calendar.HOUR, 0);
 		calendar.set(Calendar.MINUTE, 0);
 		calendar.set(Calendar.SECOND, 0);
 		calendar.set(Calendar.MILLISECOND, 0);
 		return calendar.getTime();
+	}
+	
+	/**
+	 * This method will convert java.util.Date to Cassandra LocalDate.
+	 * 
+	 * @param date
+	 *            java.util.Date
+	 * @return cassandra date.
+	 */
+	public static LocalDate getCassandraDateFromDate(final Date date) {
+		return LocalDate.fromMillisSinceEpoch(getDateWithoutTimestamp(date).getTime());
+	}
+	
+	/**
+	 * This method will convert java.util.Date to Cassandra LocalDate.
+	 * 
+	 * @param date
+	 *            java.util.Date
+	 * @return cassandra date.
+	 */
+	public static LocalDate getCassandraTimestampFromDate(final Date date) {
+		return LocalDate.fromMillisSinceEpoch(date.getTime());
 	}
 }

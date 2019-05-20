@@ -42,11 +42,13 @@ public class ProductModel {
 	/**
 	 * Marketing start date of the product.
 	 */
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date marketingStartDate;
 	
 	/**
 	 * Marketing end date of the product.
 	 */
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date marketingEndDate;
 
 	/**

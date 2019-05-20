@@ -8,6 +8,8 @@ import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
 import org.springframework.data.cassandra.core.mapping.Table;
 
+import com.datastax.driver.core.LocalDate;
+
 /**
  * Entity class for product.
  *
@@ -57,13 +59,13 @@ public class Product extends BaseEntity {
 	 * Marketing start date of product.
 	 */
 	@Column(value="MARKETING_START_DATE")
-	private Date marketingStartDate;
+	private LocalDate marketingStartDate;
 	
 	/**
 	 * Marketing End date.
 	 */
 	@Column(value="MARKETING_END_DATE")
-	private Date marketingEndDate;
+	private LocalDate marketingEndDate;
 
 	/**
 	 * Getter method for id
@@ -184,7 +186,7 @@ public class Product extends BaseEntity {
 	 *
 	 * @return the marketingStartDate
 	 */
-	public Date getMarketingStartDate() {
+	public LocalDate getMarketingStartDate() {
 		return marketingStartDate;
 	}
 
@@ -194,7 +196,7 @@ public class Product extends BaseEntity {
 	 * @param marketingStartDate 
 	 *			the marketingStartDate to set
 	 */
-	public void setMarketingStartDate(Date marketingStartDate) {
+	public void setMarketingStartDate(LocalDate marketingStartDate) {
 		this.marketingStartDate = marketingStartDate;
 	}
 
@@ -203,7 +205,7 @@ public class Product extends BaseEntity {
 	 *
 	 * @return the marketingEndDate
 	 */
-	public Date getMarketingEndDate() {
+	public LocalDate getMarketingEndDate() {
 		return marketingEndDate;
 	}
 
@@ -213,7 +215,7 @@ public class Product extends BaseEntity {
 	 * @param marketingEndDate 
 	 *			the marketingEndDate to set
 	 */
-	public void setMarketingEndDate(Date marketingEndDate) {
+	public void setMarketingEndDate(LocalDate marketingEndDate) {
 		this.marketingEndDate = marketingEndDate;
 	}
 

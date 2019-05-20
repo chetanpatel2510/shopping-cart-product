@@ -1,6 +1,7 @@
 package com.shoppingcart.product.service.impl;
 
 import java.util.Date;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,13 +38,13 @@ public class ProductServiceImpl implements ProductService {
 	public void createProduct(ProductModel productModel) {
 		Product product = new Product();
 //		BeanUtils.copyProperties(productModel, product);
-		product.setId(1L);
-		product.setProductCode("CODE1");
-		product.setMarketingEndDate(new java.sql.Date(DateUtils.getDateWithoutTimestamp().getTime()));
-		product.setMarketingStartDate(new java.sql.Date(DateUtils.getDateWithoutTimestamp().getTime()));
+		product.setProductCode(productModel.getCode());
+		product.setMarketingEndDate(DateUtils.getCassandraDateFromDate(new Date()));
+		product.setMarketingStartDate(DateUtils.getCassandraDateFromDate(new Date()));
 		product.setProductName("Name");
 		product.setProductDescription("Description");
 		product.setProductCategory("PRODUCT_CATEGORY1");
+		product.setCreatedOn(new Date());
 		productRepository.save(product);
 	}
 
