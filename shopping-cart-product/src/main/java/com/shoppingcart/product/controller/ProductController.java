@@ -1,12 +1,15 @@
 package com.shoppingcart.product.controller;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
+import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.shoppingcart.ecf.product.ProductModel;
+import com.shoppingcart.product.service.ProductService;
 import com.shoppingcart.product.util.ProductLogger;
 
 /**
@@ -18,50 +21,34 @@ import com.shoppingcart.product.util.ProductLogger;
 @RestController
 public class ProductController {
 	
+	/**
+	 * logger declaration.
+	 */
 	@Autowired
-	private ProductLogger productLogger;
+	private ProductLogger logger;
+	
+	/**
+	 * productService to call actual service implementation.
+	 */
+	@Autowired
+	private ProductService productService;
 
 	/**
-	 * This rest end point will return the host information where the service is
-	 * deployed.
+	 * This rest end point will create product into the system.
 	 * 
-	 * @return host information.
-	 * @throws UnknownHostException
-	 *             unknownHostException if any.
+	 * @param productModel
+	 *            product information.
+	 * @return response status.
 	 */
-	@GetMapping("/hostInfo")
-	public String getHealthCheck() throws UnknownHostException {
-		InetAddress localhost = InetAddress.getLocalHost();
-		String ipAddress = localhost.getHostAddress();
-		StringBuilder builder = new StringBuilder();
-		builder.append("IP Address: ").append(ipAddress);
-		builder.append("HostName: ").append(localhost.getHostName());
-		builder.append("Canonical host name: ").append(localhost.getCanonicalHostName());
-		
-		productLogger.info(this, "Host Information is: {}", builder.toString());
-		
-		return builder.toString();
+	@PostMapping("/createProduct")
+	public ResponseEntity<String> createProduct(ProductModel productModel) {
+		// TODO - validate product model
+		productService.createProduct(productModel);
+		return new ResponseEntity(HttpStatus.OK);
 	}
 	
-	/**
-	 * This method will check health of the application. It can be used by
-	 * kubernetes to check liveliness probe.
-	 * 
-	 * @return application data.
-	 */
-	@GetMapping("/healthCheck")
-	public String healthCheck() {
-		productLogger.info(this, "Health of the application is good...");
-		return "Success";
-	}
-	
-	/**
-	 * This method will be used by kubernetes to check the readiness probe.
-	 * 
-	 * @return readiness information.
-	 */
-	@GetMapping("/readiness")
-	public String readinessProbe() {
-		return "Success";
+	@PostMapping("/getProductByCode/{code}")
+	public ResponseEntity<ProductModel> getProductByCode(@PathParam("code") String productCode) {
+		return new ResponseEntity<ProductModel>(HttpStatus.OK);
 	}
 }

@@ -1,2 +1,0 @@
-server:
-  port: ${shopping-cart-product.port:9000}

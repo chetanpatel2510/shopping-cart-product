@@ -1,0 +1,15 @@
+server:
+  port: ${shopping-cart-product.port:9001}
+spring:
+  application:
+    name: shopping-cart-product
+  profiles: # Enable active profiles (It is list of profiles)
+    active:
+      - ${spring.active.profile:local}
+  cloud:    # Enable discovery of config service by service id
+    config:
+      override-system-properties: false
+      profile: ${spring.active.profile:local}
+      uri:
+      - http://35.202.149.191:9000/
+      
