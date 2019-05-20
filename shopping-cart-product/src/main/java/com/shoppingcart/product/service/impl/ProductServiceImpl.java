@@ -41,9 +41,9 @@ public class ProductServiceImpl implements ProductService {
 		product.setProductCode(productModel.getCode());
 		product.setMarketingEndDate(DateUtils.getCassandraDateFromDate(new Date()));
 		product.setMarketingStartDate(DateUtils.getCassandraDateFromDate(new Date()));
-		product.setProductName("Name");
-		product.setProductDescription("Description");
-		product.setProductCategory("PRODUCT_CATEGORY1");
+		product.setProductName(productModel.getName());
+		product.setProductDescription(productModel.getDescription());
+		product.setProductCategory(productModel.getCategory());
 		product.setCreatedOn(new Date());
 		productRepository.save(product);
 	}
