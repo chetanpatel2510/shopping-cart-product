@@ -1,5 +1,3 @@
-server:
-  port: ${shopping-cart-product.port:9001}
 spring:
   application:
     name: shopping-cart-product
@@ -11,5 +9,5 @@ spring:
       override-system-properties: false
       profile: ${spring.active.profile:local}
       uri:
-      - http://shopping-cart-config-http-service:9000/
+      - http://35.202.149.191:9000/
       
