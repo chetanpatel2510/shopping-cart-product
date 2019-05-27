@@ -9,5 +9,5 @@ spring:
       override-system-properties: false
       profile: ${spring.active.profile:local}
       uri:
-      - http://35.202.149.191:9000/
+      - http://shopping-cart-config-service:8080/
       
